@@ -41,14 +41,12 @@ const CalculationControls: React.FC<Props> = ({
   // 選択した食品をリストに追加
   const handleAddFood = () => {
     if (!selectedValue) return;
-    setSelectedFoods([
+    const newList = [
       ...selectedFoods,
-      { food: selectedValue, operation: "+" },
-    ]);
-    onSelectedFoodsChange([
-      ...selectedFoods,
-      { food: selectedValue, operation: "+" },
-    ]);
+      { food: selectedValue, operation: "+" as const },
+    ];
+    setSelectedFoods(newList);
+    onSelectedFoodsChange(newList);
     setSelectedValue(null);
     setInputValue("");
   };
@@ -140,8 +138,12 @@ const CalculationControls: React.FC<Props> = ({
                 }
               }}
             >
-              <ToggleButton value="+">+</ToggleButton>
-              <ToggleButton value="-">-</ToggleButton>
+              <ToggleButton value="+" sx={{ fontWeight: "bold" }}>
+                +
+              </ToggleButton>
+              <ToggleButton value="-" sx={{ fontWeight: "bold" }}>
+                -
+              </ToggleButton>
             </ToggleButtonGroup>
             <Box sx={{ flexGrow: 1 }}>{item.food.foodName}</Box>
             <IconButton onClick={() => handleRemoveFood(index)}>

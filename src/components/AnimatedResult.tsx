@@ -6,15 +6,17 @@ import { PCAFoodData } from "../pages/HomePage";
 
 type Props = {
   closestFood: PCAFoodData | null;
+  animationKey: number; // 再アニメーション用のキー
 };
 
-const AnimatedResult: React.FC<Props> = ({ closestFood }) => {
+const AnimatedResult: React.FC<Props> = ({ closestFood, animationKey }) => {
   if (!closestFood) {
     return <Typography variant="body1">結果がまだありません</Typography>;
   }
 
   return (
     <motion.div
+      key={animationKey} // ここが変更されるたびにコンポーネントが再マウント
       initial={{ opacity: 0, scale: 0.5 }}
       animate={{ opacity: 1, scale: 1 }}
       transition={{ duration: 0.5 }}
