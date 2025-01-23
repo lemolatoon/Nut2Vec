@@ -87,14 +87,6 @@ const HomePage: React.FC = () => {
     window.history.replaceState(null, "", newUrl);
   }, [selectedFoods]);
 
-  // CalculationControls から新しいリストを受け取る
-  const handleSelectedFoodsChange = (
-    newList: { food: PCAFoodData; operation: "+" | "-" }[],
-  ) => {
-    // merge with existing list
-    setSelectedFoods([...(selectedFoods ?? []), ...newList]);
-  };
-
   // 計算結果を受け取り、アニメーションキーを更新
   const handleResult = (result: PCAFoodData | null) => {
     setClosestFood(result);
