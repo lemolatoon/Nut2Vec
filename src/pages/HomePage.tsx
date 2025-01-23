@@ -125,7 +125,8 @@ const HomePage: React.FC = () => {
       <Box sx={{ mb: 2 }}>
         <CalculationControls
           foodData={foodData}
-          onSelectedFoodsChange={handleSelectedFoodsChange}
+          selectedFoods={selectedFoods ?? []}
+          setSelectedFoods={setSelectedFoods}
           onResult={handleResult}
         />
       </Box>

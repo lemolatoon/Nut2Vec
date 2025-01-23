@@ -20,18 +20,19 @@ type SelectedFoodItem = {
 
 type Props = {
   foodData: PCAFoodData[];
-  onSelectedFoodsChange: (newList: SelectedFoodItem[]) => void;
+  selectedFoods: SelectedFoodItem[];
+  setSelectedFoods: (newList: SelectedFoodItem[]) => void;
   onResult: (result: PCAFoodData | null) => void;
 };
 
 const CalculationControls: React.FC<Props> = ({
   foodData,
-  onSelectedFoodsChange,
+  selectedFoods,
+  setSelectedFoods,
   onResult,
 }) => {
   const [inputValue, setInputValue] = useState("");
   const [selectedValue, setSelectedValue] = useState<PCAFoodData | null>(null);
-  const [selectedFoods, setSelectedFoods] = useState<SelectedFoodItem[]>([]);
 
   // 部分一致
   const filteredFoods = foodData.filter((food) =>
@@ -46,7 +47,6 @@ const CalculationControls: React.FC<Props> = ({
       { food: selectedValue, operation: "+" as const },
     ];
     setSelectedFoods(newList);
-    onSelectedFoodsChange(newList);
     setSelectedValue(null);
     setInputValue("");
   };
@@ -56,7 +56,6 @@ const CalculationControls: React.FC<Props> = ({
     const newList = [...selectedFoods];
     newList.splice(index, 1);
     setSelectedFoods(newList);
-    onSelectedFoodsChange(newList);
   };
 
   // 「+ / -」切り替え
@@ -64,7 +63,6 @@ const CalculationControls: React.FC<Props> = ({
     const newList = [...selectedFoods];
     newList[index].operation = value;
     setSelectedFoods(newList);
-    onSelectedFoodsChange(newList);
   };
 
   // コサイン類似度計算
