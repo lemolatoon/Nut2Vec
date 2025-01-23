@@ -1,9 +1,9 @@
-function App() {
-  return (
-    <>
-      <div>Hi!</div>
-    </>
-  )
-}
+// src/App.tsx
+import React from "react";
+import HomePage from "./pages/HomePage";
 
-export default App
+const App: React.FC = () => {
+  return <HomePage />;
+};
+
+export default App;
